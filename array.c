@@ -66,7 +66,7 @@ int main() {
         }
     }
     
-    
+    //ALGORITMO DE CRIAÇÃO DOS VETORES!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     /* Nosso número na base n. Ele é um vetor
      * de n+1 posições representando um número
      * na base n.
