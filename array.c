@@ -1,11 +1,72 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <time.h>
 
 /* Tamanho máximo da string de entrada. */
 #define MAX 250
 
 int main() {
+    
+    FILE* file = NULL;
+    char caractere;
+    int cont=1;
+
+    file = fopen("arquivo.txt", "rt");
+    if(file==NULL)
+        printf("Arquivo nao encontrado\n");
+    else
+        printf("arquivo lido com sucesso!\n");
+
+    for (char c = getc(file); c != EOF; c = getc(file)){
+        if (c == '\n') // Increment count if this character is newline
+            cont = cont + 1;
+    }
+
+    int matriz[cont][cont];
+    for(int linha=0; linha<cont; linha++){
+        for(int coluna=0; coluna<cont; coluna++){
+            if(linha==coluna){
+                matriz[linha][coluna] = -1;
+            }
+            else{
+                matriz[linha][coluna] = 0;
+            }
+        }
+    }
+    //pegar o primeiro caracter o arquivo e associar ele à linha da matriz.
+    //pega o outro caracter e asscia ele à coluna da matriz e tranforma o valor em 1.
+    int contLido=1;
+    char numero[50];
+    int linha, coluna=0;
+    file = fopen("arquivo.txt", "rt");
+    while (!feof(file)){
+        fscanf(file,"%s%c", numero, &caractere);
+        if(contLido == 1){
+            linha = atoi(numero);
+            contLido++;
+        }
+        else{
+            coluna = atoi(numero);
+            matriz[linha][coluna] = 1;
+        }
+        if(caractere=='\n'){
+            contLido = 1;
+        }
+    }
+    for(int linha=0; linha<cont; linha++){
+        for(int coluna=0; coluna<cont; coluna++){
+            //printf("%d", matriz[linha][coluna]);
+            if(coluna==cont-1){
+                printf("%d \n", matriz[linha][coluna]);
+            }
+            else{
+                printf("%d ", matriz[linha][coluna]);
+            }
+        }
+    }
+    
+    
     /* Nosso número na base n. Ele é um vetor
      * de n+1 posições representando um número
      * na base n.
@@ -52,7 +113,9 @@ int main() {
 
     /* Termina quando a última posição do vetor
      * for 1. */
+    int cont2;
     while ( num[r] == 0 ) {
+        cont2=0;
         for ( i = 0; i < n; i++ ) {
             /* processo de mapeamento. */
             for ( j = 0, k = r-1; j < r; j++ ) {
@@ -61,7 +124,22 @@ int main() {
             }
             /* Mostra o resultado. */
             str[r] = 0 ;
-            printf("%s\n", str) ;
+            //printf("%s\n", str)
+            
+            //VETOR DAS CORES GERADO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            for(int i=0; i < strlen(str); i++){
+                //str[i] == A ....apenas um exemplo em que o vetor começa com a cor A
+                for(int j=i; j<linha; j++){
+                    if(matriz[i][j]==1){ //a coluna que for adjacente
+                        if(str[i]==str[j+1]){   //str[i]=A ==  str[j]
+                            cont2++;
+                        }
+                    }
+                }
+            }
+            if(cont2==1){
+                printf("%s\n", str);
+            }
 
             /* incrementa o algarismo menos significativo. */
             num[0]++ ;
@@ -75,6 +153,7 @@ int main() {
             }
         }
     }
+    //printf("Timestamp: %d\n",(int)time(NULL));
 
     return 0 ;
 }   
