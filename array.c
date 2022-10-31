@@ -12,7 +12,7 @@ int main() {
     char caractere;
     int cont=1;
 
-    file = fopen("arquivo.txt", "rt");
+    file = fopen("entrada_I.txt", "rt");
     if(file==NULL)
         printf("Arquivo nao encontrado\n");
     else
@@ -98,8 +98,8 @@ int main() {
             str[j] = 0 ;
         }
     }
-    strcpy(input, str) ;
-    n = strlen(input) ;
+    strcpy(input, str);
+    n = strlen(input);
 
     /* Cria o nosso número. Ele é um vetor de
      * r+1 posições, sendo que a última é 
@@ -127,6 +127,15 @@ int main() {
             //printf("%s\n", str)
             
             //VETOR DAS CORES GERADO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            for(int i=0;i<n;i++){
+                for(int j=0;j<n;j++){
+                    if(str[i]==str[j] && matriz[i][j]==1){
+                       return;
+                    }
+                }
+            }
+            printf("Combinação [%s] atende a matriz.");
+            /*
             for(int i=0; i < strlen(str); i++){
                 //str[i] == A ....apenas um exemplo em que o vetor começa com a cor A
                 for(int j=i; j<linha; j++){
@@ -137,6 +146,7 @@ int main() {
                     }
                 }
             }
+            */
             if(cont2==1){
                 printf("%s\n", str);
             }
