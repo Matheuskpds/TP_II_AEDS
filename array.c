@@ -11,8 +11,9 @@ int main() {
     FILE* file = NULL;
     char caractere;
     int cont=1;
+    clock_t t; 
 
-    file = fopen("entrada_I.txt", "rt");
+    file = fopen("arquivo.txt", "rt");
     if(file==NULL)
         printf("Arquivo nao encontrado\n");
     else
@@ -78,11 +79,13 @@ int main() {
     char input[MAX], str[MAX] ;
     int n, r, i, j, k ;
 
-    printf("Entre com o conjunto inicial: ") ;
-    scanf("%s", input) ;
+    /*printf("Entre com o conjunto inicial: ") ;
+    scanf("%s", input) ;*/
+    strcpy(input, "AV");
 
-    printf("Entre com o r: ") ;
-    scanf("%d", &r) ;
+    /*printf("Entre com o r: ") ;
+    scanf("%d", &r) ;*/
+    r = 5;
 
     /* Aqui elimina-se caracteres repetidos na entrada.
      * Esse procedimento não faz parte do algoritmo, e
@@ -114,9 +117,11 @@ int main() {
     /* Termina quando a última posição do vetor
      * for 1. */
     int cont2;
+    int aux=0;
+    t = clock(); //armazena tempo
     while ( num[r] == 0 ) {
-        cont2=0;
         for ( i = 0; i < n; i++ ) {
+            cont2=0;
             /* processo de mapeamento. */
             for ( j = 0, k = r-1; j < r; j++ ) {
                 str[k] = input[num[j]] ;
@@ -127,14 +132,26 @@ int main() {
             //printf("%s\n", str)
             
             //VETOR DAS CORES GERADO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-            for(int i=0;i<n;i++){
-                for(int j=0;j<n;j++){
-                    if(str[i]==str[j] && matriz[i][j]==1){
-                       return;
+            for(int i=0;i<cont;i++){
+                for(int j=0;j<cont;j++){
+                    if(matriz[i][j]==1){
+                        if(str[i] == str[j]){
+                            cont2++;
+                
+                        }
+                        /*else{
+                            printf("ok por enquanto\n");
+                            printf("Comparei %c com %c\n", str[i], str[j]);
+                        }*/
                     }
                 }
             }
-            printf("Combinação [%s] atende a matriz.");
+            
+            if(cont2==0){
+                aux++;
+                printf("Combinação [%s] atende a matriz.\n", str);
+            }
+            //cont2=cont2-cont2;
             /*
             for(int i=0; i < strlen(str); i++){
                 //str[i] == A ....apenas um exemplo em que o vetor começa com a cor A
@@ -147,9 +164,6 @@ int main() {
                 }
             }
             */
-            if(cont2==1){
-                printf("%s\n", str);
-            }
 
             /* incrementa o algarismo menos significativo. */
             num[0]++ ;
@@ -163,7 +177,12 @@ int main() {
             }
         }
     }
-    //printf("Timestamp: %d\n",(int)time(NULL));
+    //printf("Timestamp: %f\n",(float)time(NULL));
+    if(aux==0){
+        printf("Nenhuma solução encontrada\n");
+    }
+    t = clock()-t; //armazena tempo
+    printf("Tempo de execucao: %lf\n", ((double)t)/((CLOCKS_PER_SEC/1000))); //conversão para double
 
     return 0 ;
 }   
