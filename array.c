@@ -85,7 +85,7 @@ int main() {
 
     /*printf("Entre com o r: ") ;
     scanf("%d", &r) ;*/
-    r = 5;
+    r = 28;
 
     /* Aqui elimina-se caracteres repetidos na entrada.
      * Esse procedimento não faz parte do algoritmo, e
@@ -119,7 +119,7 @@ int main() {
     int cont2;
     int aux=0;
     t = clock(); //armazena tempo
-    while ( num[r] == 0 ) {
+    while ( num[r] == 0 ){
         for ( i = 0; i < n; i++ ) {
             cont2=0;
             /* processo de mapeamento. */
@@ -129,7 +129,7 @@ int main() {
             }
             /* Mostra o resultado. */
             str[r] = 0 ;
-            //printf("%s\n", str)
+            //printf("%s\n", str);
             
             //VETOR DAS CORES GERADO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
             for(int i=0;i<cont;i++){
@@ -150,6 +150,8 @@ int main() {
             if(cont2==0){
                 aux++;
                 printf("Combinação [%s] atende a matriz.\n", str);
+                num[r]=1;
+                break;
             }
             //cont2=cont2-cont2;
             /*
