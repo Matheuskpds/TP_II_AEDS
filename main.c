@@ -76,7 +76,7 @@ void preenche_matriz_aleatoria(int tamanho, int matriz[tamanho][tamanho]){
     int linha=0;//linha em que os 1's serão colocados
     int coluna=0;
     gera_matriz_zerada(tamanho,matriz);//zera a matriz e preenche a diagonal principal com -1
-    printf("Aguarde um estante! Estamos gerando a sua matriz...\n");
+    printf("Aguarde um instante! Estamos gerando a sua matriz...\n");
     while (linha<tamanho){//percorre as linhas da matriz
         srand((unsigned)time(NULL));
         i=rand()%5;//gera a quantidade de 1's no intervalo de 0 a 4, pois um número só pode ter 4 outros números adjacentes
@@ -182,12 +182,12 @@ void verifica_solucao(int cont, int matriz[cont][cont]){
             str[r] = 0 ;
             
             //VETOR DAS CORES GERADO
-            
+            //printf("analisando: %s\n", str);
             if(valida_arranjo(cont, matriz, str, cont2)==0){
                 aux++;
                 printf("Combinação [%s] atende a matriz.\n", str);
-                num[r]=1;
-                break;
+                //num[r]=1;
+                //break;
             }
         
             num[0]++ ;
@@ -253,4 +253,4 @@ int main() {
     
 
     return 0 ;
-} 
+}    
